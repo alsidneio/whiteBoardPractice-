@@ -36,10 +36,33 @@ class LinkedList{
         return count;
     }
 
-    intersection(list1,list2){
-        
-    }
+    reverse(){
 
+        //---------------------explanation----------------------//
+        //reversing a list requires a shuffling of entir nodes;
+        // NextNode: prserves the list state before the shuffle occurs 
+        //currNode: moves us down the list chain
+        //prevNode: is what we use to build the list in reverse
+        //so for each iterartion we are going to:
+        //      1. preserve the current state
+        //      2. point CurrNode.next to prevNode(the whole collection)
+        //      3. totally replace what in prevNode by setting prevNode=currNode
+        //      4. totally replace CurrNode by setting it tothe node we preservered earlier
+        let currNode= this.head;
+        let prevNode=null;
+        let nextNode;
+        console.log(currNode);
+        while(currNode){
+            nextNode=currNode.next; //1
+            currNode.next=prevNode//2
+            //console.log(currNode)
+            prevNode=currNode//3
+            //console.log(prevNode)
+            currNode=nextNode;//4
+        }
+
+       return prevNode;
+    }
     removeNthFromLast(k){
         //O comlexity: O(n): it will at most cycle through the list twice
         //-----------------------Explanation----------------------------//
