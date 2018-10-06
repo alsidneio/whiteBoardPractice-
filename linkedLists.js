@@ -25,6 +25,21 @@ class LinkedList{
         }
     }
 
+    size(){
+        let count=0
+        let currNode=this.head;
+        while(currNode){
+            currNode=currNode.next;
+            count++;
+        }
+
+        return count;
+    }
+
+    intersection(list1,list2){
+        
+    }
+
     removeNthFromLast(k){
         //O comlexity: O(n): it will at most cycle through the list twice
         //-----------------------Explanation----------------------------//
@@ -116,7 +131,54 @@ class LinkedList{
         console.log(this.head);    
     }
 }
+const intersection=(node1, node2)=>{
+    let count1=0, count2=0;
+    let currNode1=node1.head;
+    let currNode2=node2.head;
 
+    while(currNode1){
+        currNode1=currNode1.next;
+        count1++;
+    } 
+
+    while(currNode2){
+        currNode2=currNode2.next;
+        count2++;
+    } 
+
+    currNode1= node1.head;
+    currNode2= node2.head;
+
+    let diff=Math.abs(count1-count2);
+   
+
+    if(count1>count2){
+        count1=diff;
+        while(count1>0){
+            currNode1=currNode1.next
+            count1--;
+        }
+    }else{
+        count2=diff;
+        while(count2>0){
+            currNode2=currNode2.next;
+            count2--
+        }
+    }
+    while(currNode1){
+        
+        if(JSON.stringify(currNode1)===JSON.stringify(currNode2)){
+            return currNode1;
+        }else{
+            currNode1=currNode1.next;
+            currNode2=currNode2.next;
+        }
+
+    }
+
+ return false;     
+
+}
 let testList= new LinkedList()
 testList.add(5);
 testList.add(7);
@@ -124,4 +186,13 @@ testList.add(1);
 testList.add(3);
 testList.add(7);
 testList.add(5);
-testList.palindrome();
+
+ 
+let testList2=new LinkedList();
+
+testList2.add(3);
+testList2.add(7);
+testList2.add(5);
+testList2.add(4);
+
+intersection(testList,testList2)
