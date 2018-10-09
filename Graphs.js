@@ -45,6 +45,35 @@ class graph{
         }
     }
 
+    DFSRecurse(vertex){
+        let result =[];
+        let visted={};
+
+        const traverse = (node) =>{
+            if(!node){
+                return;
+            }
+
+            result.push(node)
+            if(!visted[node]){
+                visted[node]=1;
+            }
+
+            //The following 3 lines  of code allow the traversal into
+            //the pgraph children and when the if condition is false
+            //allows us to traverse back out. 
+            for (let item of this.adjList[node]){
+                if(!visted[item]){
+                    traverse(item);
+                }
+            }
+        }
+
+        traverse(vertex)
+        return result
+       
+    }
+
     DFS(vertex){
         let visited={};
         let result=[];
