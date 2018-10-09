@@ -45,7 +45,7 @@ class graph{
         }
     }
 
-    DFSRecurse(vertex){
+     DFSRecurse(vertex){
         let result =[];
         let visted={};
 
@@ -114,6 +114,31 @@ class graph{
         
         return result
 
+    }
+
+    isPath(node1,node2){
+        let visited = {};
+        let result = [];
+        let queue = [];
+        let current;
+
+        visited[node1]=1;
+        queue.unshift(node1);
+        while(queue.length>0){
+            current = queue.pop();
+            result.push(current);
+            for(let item of this.adjList[current]){
+                if(item===node2){
+                    return true; 
+                }else{
+                    if(!visited[item]){
+                        visited[item]=1;
+                        queue.unshift(item)
+                    }
+                }
+            }
+        }
+        return(result, false);
     }
 
 }
