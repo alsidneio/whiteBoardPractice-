@@ -129,3 +129,42 @@ const isBst=(tree, min=Number.MIN_VALUE, max=Number.MAX_VALUE)=>{
     // true||false values are returned up the tree to give us our final result 
     return isBst(tree.left,min, tree.value) && isBst(tree.right, tree.value,max)
 }
+
+//My implemention of finding the successor of a random node in a BST
+
+const succesor = (n)=>{
+   //if it has a right node give me the left most of that right node 
+    if(n.right){
+        next(n.right)
+    }
+
+    const next= (node)=>{
+        if(node.left){
+            next(node.left)
+        }
+        return node.value 
+    }
+    //if im at a left most node at the bottom of the tree
+    if(!n.left && !n.right && n.value<n.parent.value){
+        return n.parent.value
+    }
+
+    // if im at the right most node at the bottom of the tree, traverse up till 
+    //I find a greter parent and return that parent.
+    if(!n.left && !n.right && n.value> n.parent.value){
+        return up(n)
+    }
+
+    const up =(node)=>{
+        if(node.parent===null){
+            return null
+        }
+
+        if(node.value>node,parent.value){
+            return up(node)
+        }
+
+        return node.parent.value
+    }
+
+}
