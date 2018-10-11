@@ -112,3 +112,20 @@ const bin2linkedListByLevel=(tree)=>{
 
     return head;
 }
+
+
+//The following code verifies that th tree is a BST
+//has a time complexity of O(N) because we have to visit every node. 
+const isBst=(tree, min=Number.MIN_VALUE, max=Number.MAX_VALUE)=>{
+    //means we've gotton to the bottom fo a true without hitting a false 
+    if(!tree){
+        return true;
+    }
+    //when we go left the min value updates, when we go right the max value updates 
+    if(tree.value<=min || tree.value>max){
+        return false;
+    }
+    
+    // true||false values are returned up the tree to give us our final result 
+    return isBst(tree.left,min, tree.value) && isBst(tree.right, tree.value,max)
+}
