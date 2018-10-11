@@ -168,3 +168,23 @@ const succesor = (n)=>{
     }
 
 }
+
+const commonAncestor =(tree,node1,node2)=>{
+    // if the tree is null of we have reached the bottom of the tree
+    if(!tree){
+        return null;
+    }
+
+    if(tree===node1 || tree===node2){ //stop descending and return the node
+        return tree;
+    }
+
+    left = commonAncestor(tree.left, node1, node2); //descend to the left 
+    right = commonAncestor(tree.right, node1,node2); //descend to the right 
+
+    if(left && right){
+        return tree;
+    }else{
+        return(left?left:right) //because we descend to the left if there is nothing there it has to be on the right.
+    }
+}
