@@ -188,3 +188,31 @@ const commonAncestor =(tree,node1,node2)=>{
         return(left?left:right) //because we descend to the left if there is nothing there it has to be on the right.
     }
 }
+
+const largestValuesInTreeRows=(t)=> {
+    let result=[]
+    if(!t){
+        return result
+    }
+    
+    let holder=[t]
+    while(holder.length>0){
+        let max=-Infinity;
+        let size=holder.length;
+        console.log(holder)
+        for(let i=0; i<size; i++){
+            let currNode=holder.pop();
+            max=Math.max(max,currNode.value);
+            if(currNode.left){
+                holder.unshift(currNode.left)
+            }
+            
+            if(currNode.right){
+                holder.unshift(currNode.right)
+            }
+        }
+        result.push(max)  
+    }
+    return result;
+
+}
