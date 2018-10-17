@@ -116,18 +116,17 @@ const bin2linkedListByLevel=(tree)=>{
 
 //The following code verifies that th tree is a BST
 //has a time complexity of O(N) because we have to visit every node. 
-const isBst=(tree, min=Number.MIN_VALUE, max=Number.MAX_VALUE)=>{
-    //means we've gotton to the bottom fo a true without hitting a false 
+const isBst=(tree, min=-Infinity, max=Infinity)=>{
     if(!tree){
         return true;
     }
-    //when we go left the min value updates, when we go right the max value updates 
-    if(tree.value<=min || tree.value>max){
+    
+    
+    if(tree.val<=min || tree.val>=max){
         return false;
     }
-    
-    // true||false values are returned up the tree to give us our final result 
-    return isBst(tree.left,min, tree.value) && isBst(tree.right, tree.value,max)
+
+    return isBst(tree.left,min, tree.val) && isBst(tree.right, tree.val,max)
 }
 
 //My implemention of finding the successor of a random node in a BST
@@ -215,4 +214,45 @@ const largestValuesInTreeRows=(t)=> {
     }
     return result;
 
+}
+
+//This code takes a tree and returns the sum of all the paths from root to leaf 
+const digitTreeSum=(t)=>{
+    let numStr='';
+    let sum=0;
+    const traverse=(node, str)=>{
+        
+        let leftSum;
+        let rightSum;
+        
+        str= str + node.value.toString()
+
+      if(node.left){
+       leftSum= traverse(node.left,str)
+        }
+
+     if(node.right){
+        rightSum=traverse(node.right, str)
+        }
+    
+    //Conditions returning the sum to the previous nodes     
+    if(leftSum && rightSum){
+        return leftSum+rightSum; 
+    }
+    
+    if(!leftSum && !rightSum){
+     return parseInt(str);
+    }
+
+    if(!leftSum){
+        return rightSum;
+    }
+        
+    if(!rightSum){
+        return leftSum;
+    }
+       
+}
+   return traverse(t,numStr)
+    
 }
